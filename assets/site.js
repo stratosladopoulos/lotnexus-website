@@ -8,13 +8,15 @@
     if (!toggle || !nav) return;
     nav.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.setAttribute('aria-label', 'Open navigation');
+    toggle.setAttribute('aria-label', document.documentElement.lang === 'el' ? 'Άνοιγμα πλοήγησης' : 'Open navigation');
   };
   if (toggle && nav) {
     toggle.addEventListener('click', () => {
       const open = nav.classList.toggle('open');
       toggle.setAttribute('aria-expanded', String(open));
-      toggle.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      toggle.setAttribute('aria-label', document.documentElement.lang === 'el'
+        ? (open ? 'Κλείσιμο πλοήγησης' : 'Άνοιγμα πλοήγησης')
+        : (open ? 'Close navigation' : 'Open navigation'));
     });
     nav.addEventListener('click', event => {
       if (event.target.closest('a')) closeMenu();
